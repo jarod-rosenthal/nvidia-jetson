@@ -2,42 +2,21 @@
 Nvidia Jetson Nano/Xavier project Code
 
 Hardware:
-- NVIDIA Jetson Nano Module (B01), Production-Ready AI System On Module (SOM), With 16GB EMMC
-- JETSON-IO-BASE-A - Carrier Board for Jetson Nano
-- IMX219-83 Stereo Camera
+- [NVIDIA Jetson Nano Module (B01), Production-Ready AI System On Module (SOM), With 16GB EMMC](https://www.waveshare.com/jetson-nano-module.htm)
+- [JETSON-IO-BASE-A - Carrier Board for Jetson Nano](https://www.waveshare.com/wiki/JETSON-NANO-DEV-KIT)
+- [IMX219-83 Stereo Camera](https://www.waveshare.com/imx219-83-Stereo-camera.htm)
 
 Software:
-- Nvidia SDK Manager on x86-64 Ubuntu OS
-- JetPack 4.6.3 
+- [Nvidia SDK Manager on x86-64 Ubuntu OS](https://docs.nvidia.com/sdk-manager/install-with-sdkm-jetson/index.html)
+- JetPack 4.6.3 flashed onto EMMC
 
 System Installation:
 
-After flashing EMMC with JetPack via SDK. Need to setup external storage to prevent running out of storage. Connect the USB flash drive to the Jetson Nano, check the device number of the USB flash drive, such as sda, open the Jetson Nano terminal and enter.
+After flashing JetPack with SDK Manager, to setup external storage, connect the USB flash drive to the Jetson Nano, check the device number of the USB flash drive, such as sda, open the Jetson Nano terminal and ...
 
-`ls /dev/sd*`
+[`Link to Waveshare wiki JETSON-NANO-DEV-KIT`](https://www.waveshare.com/wiki/JETSON-NANO-DEV-KIT#USB_Flash_Drive_And_TF_Card_Booting_Principle)
 
-Format the USB flash drive.
+[Deploy object detection and classification with realtime vision DNN libraries using TensorRT. ](https://github.com/dusty-nv/jetson-inference)
 
-`sudo mkfs.ext4 /dev/sda`
 
-Modify the startup path.
 
-`sudo vi /boot/extlinux/extlinux.conf`
-
-Find the statement `APPEND ${cbootargs} quiet root=/dev/mmcblk0p1 rw rootwait rootfstype=ext4 console=ttyS0,115200n8 console=tty0`, modify mmcblk0p1 to sda.
-
-Mount the USB flash drive.
-
-`sudo mount /dev/sda /mnt`
-
-Copy the system to the USB flash drive (the process has no information to print, please wait patiently).
-
-`sudo cp -ax / /mnt`
-
-After the copy is completed, uninstall the USB flash drive (not unplug the USB flash drive).
-
-`sudo umount /mnt/`
-
-Restart the system.
-
-`sudo reboot`
