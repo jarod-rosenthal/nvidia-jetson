@@ -9,7 +9,7 @@ Hardware:
 
 Software:
 - [Nvidia SDK Manager on x86-64 Ubuntu OS](https://docs.nvidia.com/sdk-manager/install-with-sdkm-jetson/index.html)
-- JetPack 4.6.3 flashed onto EMMC
+- JetPack 4.6.0 flashed onto EMMC
 
 System Installation:
 
