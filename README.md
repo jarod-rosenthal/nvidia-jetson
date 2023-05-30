@@ -1,4 +1,5 @@
-# nvidia-jetson
+# NVIDIA Jetson Nano Module With 16GB EMMC
+
 Nvidia Jetson Nano/Xavier project Code
 
 Hardware:
@@ -12,24 +13,38 @@ Software:
 
 System Installation:
 
-After flashing JetPack with SDK Manager, to [setup external storage](https://www.waveshare.com/wiki/JETSON-NANO-DEV-KIT#Boot_USB_Flash_Drive_.28copy_eMMC_on_the_system.29), connect the USB flash drive to the Jetson Nano, check the device number of the USB flash drive, such as sda, open the Jetson Nano terminal and ...
+- After flashing JetPack [expand storage](https://www.waveshare.com/wiki/JETSON-NANO-DEV-KIT#Boot_USB_Flash_Drive_.28copy_eMMC_on_the_system.29)
 
-[Link to Waveshare wiki JETSON-NANO-DEV-KIT](https://www.waveshare.com/wiki/JETSON-NANO-DEV-KIT#USB_Flash_Drive_And_TF_Card_Booting_Principle)
+- Install Dependencies:
 
-Build Python3.8 on Jetson
+        sudo apt update -y && \
 
-`wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tar.xz -O ~/Downloads/Python-3.8.3.tar.xz && 
-tar -xvf ~/Downloads/Python-3.8.3.tar.xz -C ~/Downloads`
+        sudo apt install nano python-pip python3-pip python3-venv python3-setuptools libgdm-dev libnss3-dev libssl-dev libsqlite3-dev \
+        libreadline-dev libbz2-dev libdb-dev libdb++-dev libgdbm-dev libgdbm-dev libffi-dev -y
 
-`mkdir build-python-3.8.3 && cd $_`
+- Build Python 3.8.3
 
-`../Python-3.8.3/configure --enable-optimizations`
+        wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tar.xz -O ~/Python-3.8.3.tar.xz && tar -xvf ~/Python-3.8.3.tar.xz && \
 
-`make -j$(nproc)`
+        mkdir build-python-3.8.3 && cd $_ && ../Python-3.8.3/configure --enable-optimizations && make -j$(nproc) && sudo -H make altinstall
 
-`sudo -H make altinstall`
+- Create Python3.8 Virtual Environment
 
-[Build OpenCV Contributor version 4.7.0](https://github.com/mdegans/nano_build_opencv)
+        /usr/local/bin/python3.8 -m venv ~/.py3.8.3
+        echo "alias activate='source ~/.py3.8.3/bin/activate'" >> ~/.bashrc && source ~/.bashrc
+        activate
+        # Link Python3.6 cv2 module to Python3.8 site-packages
+        ln -s /usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so ~/.py3.8.0/lib/python3.8/site-packages/cv2.so
+        # Install dependencies for opencv
+        pip install --upgrade pip
+        pip install -U numpy 
+        # Install drivers for PTZ
+        pip install adafruit-circuitpython-servokit
+
+- [Build OpenCV-Contrib 4.4.0](https://github.com/mdegans/nano_build_opencv)
+    
+        ./build.sh
+        
 
 [Deploy object detection and classification with realtime vision DNN libraries using TensorRT. ](https://github.com/dusty-nv/jetson-inference)
 
