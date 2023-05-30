@@ -34,7 +34,7 @@ System Installation:
         echo "alias activate='source ~/.py3.8.3/bin/activate'" >> ~/.bashrc && source ~/.bashrc
         activate
         # Link Python3.6 cv2 module to Python3.8 site-packages
-        ln -s /usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so ~/.py3.8.0/lib/python3.8/site-packages/cv2.so
+        ln -s /usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-aarch64-linux-gnu.so ~/.py3.8.3/lib/python3.8/site-packages/cv2.so
         # Install dependencies for opencv
         pip install --upgrade pip
         pip install -U numpy 
