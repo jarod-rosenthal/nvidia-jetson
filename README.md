@@ -15,6 +15,10 @@ System Installation:
 
 - After flashing JetPack [expand storage](https://www.waveshare.com/wiki/JETSON-NANO-DEV-KIT#Boot_USB_Flash_Drive_.28copy_eMMC_on_the_system.29)
 
+-  Never prompt the current user for a password when that user uses sudo:
+
+        echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee "/etc/sudoers.d/dont-prompt-$USER-for-sudo-password"
+        
 - Install Dependencies:
 
         sudo apt update -y && \
@@ -27,7 +31,14 @@ System Installation:
         wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tar.xz -O ~/Python-3.8.3.tar.xz && tar \
         -xvf ~/Python-3.8.3.tar.xz && mkdir build-python-3.8.3 && cd $_ \
         && ../Python-3.8.3/configure --enable-optimizations && make -j$(nproc) && sudo -H make altinstall
+        
+        
+- [Build OpenCV-Contrib 4.5.3]([https://github.com/mdegans/nano_build_opencv](https://github.com/Qengineering/Install-OpenCV-Jetson-Nano))
+    
+        wget https://github.com/Qengineering/Install-OpenCV-Jetson-Nano/raw/main/OpenCV-4-5-3.sh \
+        sudo chmod 755 ./OpenCV-4-5-3.sh && ./OpenCV-4-5-3.sh
 
+       
 - Create Python3.8 Virtual Environment
 
         /usr/local/bin/python3.8 -m venv ~/.py3.8.3
@@ -41,17 +52,8 @@ System Installation:
         pip install -U numpy 
         # Install drivers for PTZ
         pip install adafruit-circuitpython-servokit
-
-- [Build OpenCV-Contrib 4.4.0](https://github.com/mdegans/nano_build_opencv)
-    
-    Clone repo change parameters to match and run build.
-
-        CUDA_ARCH_BIN=5.3,6.2,7.2,7.5,8.7
-        CUDNN_VERSION='10.2'
-
-        ./build.sh 4.6.0
         
-
+        
 [Deploy object detection and classification with realtime vision DNN libraries using TensorRT. ](https://github.com/dusty-nv/jetson-inference)
 
 [Setup VNC Server for remote headless operation.](https://computingforgeeks.com/how-to-install-vnc-server-on-ubuntu/)
