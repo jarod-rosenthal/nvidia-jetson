@@ -19,12 +19,18 @@ System Installation:
 
         echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee "/etc/sudoers.d/dont-prompt-$USER-for-sudo-password"
         
-- Install Dependencies:
+        - Install Dependencies:
 
         sudo apt update -y && \
 
         sudo apt install nano python-pip python3-pip python3-venv python3-setuptools libgdm-dev libnss3-dev libssl-dev \
         libsqlite3-dev libreadline-dev libbz2-dev libdb-dev libdb++-dev libgdbm-dev libgdbm-dev libffi-dev -y
+        
+        sudo -H pip3 install -U jetson-stats
+
+        sudo nvpmodel -m 0
+
+        sudo jetson_clocks
 
 - Build Python 3.8.3
 
@@ -32,8 +38,12 @@ System Installation:
         -xvf ~/Python-3.8.3.tar.xz && mkdir build-python-3.8.3 && cd $_ \
         && ../Python-3.8.3/configure --enable-optimizations && make -j$(nproc) && sudo -H make altinstall
         
+        sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1 && \
+        sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 2
         
-- [Build OpenCV-Contrib 4.5.3]([https://github.com/mdegans/nano_build_opencv](https://github.com/Qengineering/Install-OpenCV-Jetson-Nano))
+        
+- [Build OpenCV-Contrib 4.5.3](https://github.com/Qengineering/Install-OpenCV-Jetson-Nano)
+- https://github.com/mdegans/nano_build_opencv
     
         wget https://github.com/Qengineering/Install-OpenCV-Jetson-Nano/raw/main/OpenCV-4-5-3.sh \
         sudo chmod 755 ./OpenCV-4-5-3.sh && ./OpenCV-4-5-3.sh
