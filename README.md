@@ -38,8 +38,8 @@ System Installation:
         -xvf ~/Python-3.8.3.tar.xz && mkdir build-python-3.8.3 && cd $_ \
         && ../Python-3.8.3/configure --enable-optimizations && make -j$(nproc) && sudo -H make altinstall
         
-        sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1 && \
-        sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 2
+        sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2 && \
+        sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 1
         
         
 - [Build OpenCV-Contrib 4.5.3](https://github.com/Qengineering/Install-OpenCV-Jetson-Nano)
